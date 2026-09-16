@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarClock, CheckCircle2, Code2, Compass, Lightbulb, MessageCircleHeart, Pencil, Rocket, Sparkles } from 'lucide-react'
+import { ArrowRight, CalendarClock, CheckCircle2, Code2, Compass, Lightbulb, MessageCircleHeart, Pencil } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { CandidateHeader } from '../components/AppShell'
@@ -10,13 +10,13 @@ import type { Candidate, Conversation, Feedback, StatusHistory } from '../types'
 type PortalData = { candidate: Candidate; feedback: Feedback[]; history: StatusHistory[]; conversations: Conversation[] }
 
 const statusCopy: Record<string, { title: string; text: string }> = {
-  'Nova inscrição': { title: 'Seu perfil chegou por aqui!', text: 'Agora vamos conhecer suas respostas com calma. Você não precisa fazer mais nada por enquanto.' },
-  'Analisando': { title: 'Estamos conhecendo seu perfil.', text: 'Estamos lendo sua história, interesses e ideias. Assim que houver um próximo passo, avisamos por aqui.' },
-  'Quero conversar': { title: 'Bora trocar uma ideia?', text: 'Gostamos do que vimos e queremos conhecer você além da tela. Confira os próximos passos.' },
-  'Conversa realizada': { title: 'Valeu pela conversa!', text: 'Estamos organizando as impressões e em breve você recebe um retorno por aqui.' },
-  'Selecionado': { title: 'Tem espaço para você na tripulação.', text: 'Que bom ter você com a gente. Confira os próximos passos para começarmos a construir.' },
-  'Talvez futuramente': { title: 'Queremos manter essa ponte.', text: 'Talvez o momento ou o projeto ainda não encaixe, mas gostamos do seu perfil e queremos continuar por perto.' },
-  'Não selecionado': { title: 'A jornada continua daqui.', text: 'Não vamos seguir juntos neste momento, mas deixamos um retorno pensado para ajudar nos seus próximos passos.' },
+  'Nova inscrição': { title: 'Perfil recebido', text: 'Sua inscrição está registrada. Avisaremos por aqui quando houver uma atualização.' },
+  'Analisando': { title: 'Perfil em análise', text: 'A equipe está lendo suas respostas. O andamento será atualizado aqui.' },
+  'Quero conversar': { title: 'Conversa proposta', text: 'Confira os detalhes da conversa nos próximos passos.' },
+  'Conversa realizada': { title: 'Conversa realizada', text: 'A equipe está organizando o retorno. Você poderá acompanhá-lo aqui.' },
+  'Selecionado': { title: 'Perfil selecionado', text: 'Confira os próximos passos para participar do grupo.' },
+  'Talvez futuramente': { title: 'Para uma próxima oportunidade', text: 'Neste momento, não há uma vaga adequada ao seu perfil. Confira o retorno da equipe abaixo.' },
+  'Não selecionado': { title: 'Inscrição encerrada', text: 'Não seguiremos com esta inscrição. Confira o retorno da equipe abaixo.' },
 }
 
 export function CandidatePortal() {
@@ -37,10 +37,10 @@ export function CandidatePortal() {
   return (
     <div className="portal-page">
       <CandidateHeader><Link className="button button--small button--ghost" to="/jornada"><Pencil size={15} />Editar perfil</Link></CandidateHeader>
-      {justSubmitted && <div className="success-banner"><div><Rocket /></div><span><strong>Perfil enviado. Agora deixa com a gente!</strong><small>Você pode acompanhar tudo nesta página.</small></span></div>}
+      {justSubmitted && <div className="success-banner"><div><CheckCircle2 /></div><span><strong>Perfil enviado.</strong><small>Acompanhe as atualizações nesta página.</small></span></div>}
       <main className="portal-wrap">
         <header className="portal-welcome">
-          <div><span className="page-kicker">SEU ESPAÇO</span><h1>Oi, {candidate.name.split(' ')[0]}.</h1><p>Aqui você acompanha a jornada sem precisar ficar caçando mensagem.</p></div>
+          <div><span className="page-kicker">SEU ESPAÇO</span><h1>Olá, {candidate.name.split(' ')[0]}.</h1><p>Acompanhe sua inscrição e as mensagens da equipe.</p></div>
           <div className="profile-chip"><div className="avatar">{initials(candidate.name)}</div><span><strong>{candidate.name}</strong><small>{candidate.area_interest}</small></span></div>
         </header>
 
@@ -53,8 +53,8 @@ export function CandidatePortal() {
 
         <div className="portal-grid">
           <section className="panel panel--feedback">
-            <div className="panel__head"><div><span className="page-kicker">FEEDBACKS</span><h2>Recados para sua jornada</h2></div><MessageCircleHeart /></div>
-            {feedback.length === 0 ? <EmptyState icon={<MessageCircleHeart />} title="Nenhum feedback por enquanto" text="Quando tivermos um retorno, ele vai aparecer aqui — escrito para você, não por um robô de RH." /> : <div className="feedback-list">{feedback.map((item) => <article className="feedback-card" key={item.id}><div className="feedback-card__top"><Sparkles /><span>{formatDate(item.created_at)}</span></div><h3>{item.title}</h3><p>{item.message}</p><div className="feedback-details">{item.positives && <div><strong><CheckCircle2 />Pontos que chamaram atenção</strong><p>{item.positives}</p></div>}{item.study_suggestions && <div><strong><Lightbulb />Uma direção para estudar</strong><p>{item.study_suggestions}</p></div>}{item.project_idea && <div><strong><Code2 />Ideia para construir</strong><p>{item.project_idea}</p></div>}{item.next_steps && <div className="next-step"><strong>Próximo passo</strong><p>{item.next_steps}</p></div>}</div></article>)}</div>}
+            <div className="panel__head"><div><span className="page-kicker">RETORNO</span><h2>Mensagens da equipe</h2></div><MessageCircleHeart /></div>
+            {feedback.length === 0 ? <EmptyState icon={<MessageCircleHeart />} title="Nenhuma mensagem ainda" text="Quando a equipe enviar um retorno, ele aparecerá aqui." /> : <div className="feedback-list">{feedback.map((item) => <article className="feedback-card" key={item.id}><div className="feedback-card__top"><span>{formatDate(item.created_at)}</span></div><h3>{item.title}</h3><p>{item.message}</p><div className="feedback-details">{item.positives && <div><strong><CheckCircle2 />Pontos que chamaram atenção</strong><p>{item.positives}</p></div>}{item.study_suggestions && <div><strong><Lightbulb />Uma direção para estudar</strong><p>{item.study_suggestions}</p></div>}{item.project_idea && <div><strong><Code2 />Ideia para construir</strong><p>{item.project_idea}</p></div>}{item.next_steps && <div className="next-step"><strong>Próximo passo</strong><p>{item.next_steps}</p></div>}</div></article>)}</div>}
           </section>
 
           <aside className="portal-side">

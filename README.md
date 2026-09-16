@@ -43,7 +43,7 @@ O arquivo `.env` está ignorado pelo Git e nunca deve ser publicado. Em produç�
 
 A entrada não aparece na navegação. Na página inicial, mantenha pressionados por pouco mais de dois segundos os três pontos quase invisíveis no canto direito do rodapé. Também é possível abrir diretamente `/sala-zero`.
 
-A cifra visual faz parte da experiência, mas a segurança real acontece no servidor: a frase secreta não é enviada ao navegador, o cookie é inacessível ao JavaScript e cinco erros bloqueiam novas tentativas por 15 minutos.
+A segurança acontece no servidor: a frase secreta não é enviada ao navegador, o cookie é inacessível ao JavaScript e cinco erros bloqueiam novas tentativas por 15 minutos.
 
 ## Produção
 
