@@ -1,0 +1,57 @@
+# Tripulação
+
+Uma plataforma para conhecer pessoas interessadas em aprender e construir produtos reais em grupo — sem transformar a experiência em um processo seletivo corporativo.
+
+## O que já funciona
+
+- jornada interativa de criação do perfil em cinco etapas;
+- conta pessoal para salvar e continuar depois;
+- perfil com interesses, tecnologias, projetos, experiências e respostas abertas;
+- área do candidato com status, feedbacks, próximos passos e histórico;
+- Sala Zero privada para visualizar todas as respostas;
+- filtros, status, impressões, notas internas, conversas e feedback individual;
+- notas e impressões administrativas nunca são enviadas para o candidato;
+- entrada administrativa escondida, protegida por frase secreta e bloqueio de tentativas;
+- banco SQLite persistente e senhas protegidas com hash.
+
+## Rodando localmente
+
+Requisitos: Node.js 24 ou superior.
+
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
+
+Abra `http://localhost:5173`.
+
+## Variáveis privadas
+
+Configure o arquivo `.env` antes de iniciar:
+
+```env
+PORT=3333
+JWT_SECRET=uma-chave-grande-e-aleatoria
+ADMIN_SECRET_PHRASE=uma-frase-longa-que-so-voce-conhece
+DATABASE_PATH=./data/tripulacao.db
+```
+
+O arquivo `.env` está ignorado pelo Git e nunca deve ser publicado. Em produção, configure essas variáveis diretamente no serviço de hospedagem.
+
+## Acesso à Sala Zero
+
+A entrada não aparece na navegação. Na página inicial, mantenha pressionados por pouco mais de dois segundos os três pontos quase invisíveis no canto direito do rodapé. Também é possível abrir diretamente `/sala-zero`.
+
+A cifra visual faz parte da experiência, mas a segurança real acontece no servidor: a frase secreta não é enviada ao navegador, o cookie é inacessível ao JavaScript e cinco erros bloqueiam novas tentativas por 15 minutos.
+
+## Produção
+
+```bash
+npm run build
+npm start
+```
+
+O servidor entrega o site e a API pelo mesmo endereço. Para manter as inscrições após reinícios, a hospedagem precisa oferecer um volume persistente e `DATABASE_PATH` deve apontar para esse volume.
+
+GitHub Pages não é suficiente para este projeto porque ele precisa de autenticação, API e banco de dados.
