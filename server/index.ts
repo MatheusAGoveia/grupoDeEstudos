@@ -7,7 +7,7 @@ import { createHash, randomUUID, timingSafeEqual } from 'node:crypto'
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { z } from 'zod'
-import { ensureDatabase, one, rows, run, serializeCandidate, transaction } from './db.ts'
+import { ensureDatabase, one, rows, run, serializeCandidate, transaction } from './db.js'
 
 const app = express()
 app.set('trust proxy', 1)
