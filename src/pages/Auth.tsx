@@ -46,12 +46,13 @@ export function Auth({ mode }: { mode: 'login' | 'register' | 'admin' }) {
       <div className="auth-page__top"><Brand /><Link to="/" className="nav-link"><ArrowLeft size={16} />Voltar</Link></div>
       <section className="auth-card">
         <div className="auth-card__visual">
-          <span className="auth-card__index">TRIPULAÇÃO / {mode === 'admin' ? 'EQUIPE' : 'PESSOAS'}</span>
+          <span className="auth-card__index">DEVGROUPX / {mode === 'admin' ? 'EQUIPE' : 'PESSOAS'}</span>
+          <div className="auth-card__brand-art" aria-hidden="true"><img src="/devgroupx-logo.png" alt="" width="1356" height="1160" /></div>
           <div className="auth-visual__copy">
-            <h2>{mode === 'admin' ? 'Um lugar para acompanhar o grupo.' : 'Projetos ficam melhores quando são feitos juntos.'}</h2>
+            <h2>{mode === 'admin' ? 'Um lugar para acompanhar o grupo.' : <>Aprender.<br />Construir.<br /><span>Evoluir juntos.</span></>}</h2>
             <p>{mode === 'admin' ? 'Acesse os perfis e registre os próximos passos.' : 'Conte o que você tem vontade de aprender e construir.'}</p>
           </div>
-          <span className="auth-card__footer">estudo · troca · projetos</span>
+          <span className="auth-card__footer">ESTUDO · TROCA · PROJETOS</span>
         </div>
 
         <form className="auth-form" onSubmit={submit}>
@@ -63,12 +64,13 @@ export function Auth({ mode }: { mode: 'login' | 'register' | 'admin' }) {
           {mode === 'admin' ? <>
             <label><span>Frase de acesso</span><div className="input-with-icon"><LockKeyhole size={17} /><input autoFocus required type={showPassword ? 'text' : 'password'} value={form.phrase} onChange={(e) => setForm({ ...form, phrase: e.target.value })} placeholder="Frase de acesso" autoComplete="off" /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? 'Esconder frase' : 'Mostrar frase'}>{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}</button></div></label>
           </> : <>
-            {mode === 'register' && <label><span>Seu nome</span><input autoFocus required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Como você gosta de ser chamado?" /></label>}
-            <label><span>E-mail</span><input autoFocus={mode !== 'register'} required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="voce@email.com" /></label>
-            <label><span>Senha</span><div className="input-with-icon"><LockKeyhole size={17} /><input required minLength={6} type={showPassword ? 'text' : 'password'} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Pelo menos 6 caracteres" /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? 'Esconder senha' : 'Mostrar senha'}>{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}</button></div></label>
+            {mode === 'register' && <label><span>Seu nome</span><input autoFocus required autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Como você gosta de ser chamado?" /></label>}
+            <label><span>E-mail</span><input autoFocus={mode !== 'register'} required autoComplete="email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="voce@email.com" /></label>
+            <label><span>Senha</span><div className="input-with-icon"><LockKeyhole size={17} /><input required minLength={6} autoComplete={mode === 'register' ? 'new-password' : 'current-password'} type={showPassword ? 'text' : 'password'} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="Pelo menos 6 caracteres" /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? 'Esconder senha' : 'Mostrar senha'}>{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}</button></div></label>
           </>}
           <button className="button button--primary button--full" disabled={sending}>{sending ? 'Aguarde...' : content.action}<ArrowRight size={18} /></button>
           {mode !== 'admin' && <div className="auth-switch">{mode === 'register' ? <>Já criou seu perfil? <Link to="/entrar">Entrar</Link></> : <>Chegando agora? <Link to="/comecar">Criar meu perfil</Link></>}</div>}
+          {mode !== 'admin' && <a className="auth-support" href="https://devgroupx.com/suporte">Precisa de ajuda? Acesse o suporte.</a>}
         </form>
       </section>
     </main>
