@@ -1,6 +1,8 @@
-# Tripulação
+# DevGroupX — participação
 
 Uma plataforma para conhecer pessoas interessadas em aprender e construir produtos reais em grupo — sem transformar a experiência em um processo seletivo corporativo.
+
+O visual acompanha [devgroupx.com](https://devgroupx.com/): grafite, violeta, tipografia Inter/IBM Plex Mono e a logo oficial estática. As páginas de início e acesso usam a mesma identidade dos controles da jornada, do espaço pessoal e dos painéis da equipe. Os ajustes visuais compartilhados estão em `src/devgroupx.css`; os tokens e estilos existentes estão em `src/index.css`.
 
 ## O que já funciona
 

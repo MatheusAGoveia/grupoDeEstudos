@@ -12,7 +12,7 @@ export function CandidateHeader({ children }: { children?: ReactNode }) {
       <Brand />
       <div className="topbar__actions">
         {children}
-        <button className="icon-button" title="Sair" onClick={async () => { await logout(); navigate('/') }}><LogOut size={18} /></button>
+        <button className="icon-button" title="Sair" aria-label="Sair" onClick={async () => { await logout(); navigate('/') }}><LogOut size={18} /></button>
       </div>
     </header>
   )
