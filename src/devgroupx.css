@@ -130,6 +130,10 @@ input:focus, textarea:focus, select:focus { border-color: #8d7ba9; box-shadow: 0
   .auth-card__visual { display: none; }
   .auth-form { padding: 40px; }
   .journey-layout, .portal-wrap { width: calc(100% - 56px); }
+  .admin-shell { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { min-width: 0; padding-inline: 16px; }
+  .sidebar nav a { gap: 0; padding-inline: 9px; }
+  .sidebar__logout { gap: 0; padding: 9px; }
 }
 @media (max-width: 600px) {
   :root { --gutter: 24px; }
@@ -156,7 +160,10 @@ input:focus, textarea:focus, select:focus { border-color: #8d7ba9; box-shadow: 0
   .auth-page__top > .nav-link { font-size: 11px; }
   .journey-layout, .portal-wrap { width: calc(100% - 32px); }
   .journey-actions { background: #090a0bf0; }
+  .journey-actions .button--launch { min-width: 0; }
   .topbar { padding-inline: 16px; }
+  .sidebar .brand { font-size: 16px; }
+  .detail-topbar__actions .button { font-size: 0; gap: 0; min-width: 38px; padding-inline: 10px; }
 }
 @media (max-width: 380px) {
   :root { --gutter: 20px; }
