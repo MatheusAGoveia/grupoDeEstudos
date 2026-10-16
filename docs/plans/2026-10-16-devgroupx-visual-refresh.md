@@ -13,7 +13,7 @@
 - [x] Refresh auth presentation and shared palette/controls across the five-step profile, candidate portal and admin screens. Preserve API calls, fields, data and access checks.
 - [x] Build and lint. Verify public routes, field validation/password visibility and keyboard focus. Use isolated browser API fixtures for candidate/admin layouts; do not create test records in production or retrieve private credentials.
 - [x] Check 320px, mobile, tablet and wide desktop layouts, inspect screenshots, and review touched React components for accessibility and state handling.
-- [ ] Commit on codex/registration-visual-refresh, prepare a reviewable deployment in the existing Vercel project and verify its public routes and unchanged API behavior.
+- [x] Commit on codex/registration-visual-refresh, prepare a reviewable deployment in the existing Vercel project and verify its public routes and unchanged API behavior.
 
 ## Boundaries to verify
 
@@ -26,3 +26,7 @@
 ## Verification evidence
 
 TypeScript/Vite production build passed locally and in Vercel. Browser fixtures verified registration request fields, password visibility, all five profile steps, save/submit and the candidate portal. Public, candidate and admin routes fit 320, 375, 390, 768, 1024, 1440 and 2560px; mobile sidebar width was corrected. Desktop/mobile screenshots were inspected. No production records were created and API/server/authentication files are unchanged. The Windows lint binding could not be installed reliably; final lint verification runs in the Linux preview build.
+
+## Release result
+
+Published at https://grupo-de-estudos-nine.vercel.app/. Production deployment `dpl_Dx4TidDkWS4vjmnqtFWMFSxiJvAM` uses application commit `e8f59708c68ce9520cc9b8f205c443ca361b4a5c`. Linux lint passed with zero errors and two pre-existing warnings in unchanged `src/App.tsx`; production build passed. Live browser checks confirmed homepage, login, registration, mobile layout, static logo and the unchanged anonymous `/api/me` JSON 401 response. Source review: https://github.com/MatheusAGoveia/grupoDeEstudos/pull/1.
